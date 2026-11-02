@@ -1,1 +1,17 @@
+-- Define a flag avisando que o loader está agindo
+if getgenv then getgenv().TwistedMainBypass = true else _G.TwistedMainBypass = true end
 
+local url = "COLOQUE_O_LINK_RAW_DO_SEU_MAIN_AQUI" 
+
+local success, errorMsg = pcall(function()
+    loadstring(game:HttpGet(url))()
+end)
+
+if not success then
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Twisted scrpt",
+        Text = "Failed to load. Check your internet or the link.",
+        Duration = 5
+    })
+    warn("Erro ao carregar: " .. tostring(errorMsg))
+end
