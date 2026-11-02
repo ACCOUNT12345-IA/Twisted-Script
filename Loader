@@ -1,17 +1,20 @@
--- Define a flag avisando que o loader está agindo
+-- Define a flag avisando que o loader está agindo (bypass da proteção)
 if getgenv then getgenv().TwistedMainBypass = true else _G.TwistedMainBypass = true end
 
-local url = "COLOQUE_O_LINK_RAW_DO_SEU_MAIN_AQUI" 
+-- Link do seu Main Script no GitHub
+local url = "https://raw.githubusercontent.com/ACCOUNT12345-IA/Twisted-Script/refs/heads/main/Main%20Script"
 
+-- Carrega e executa o Main Script
 local success, errorMsg = pcall(function()
     loadstring(game:HttpGet(url))()
 end)
 
+-- Se der erro (link caiu, sem internet, etc), avisa o jogador
 if not success then
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "Twisted scrpt",
-        Text = "Failed to load. Check your internet or the link.",
+        Text = "Failed to load. Check your internet or try again later.",
         Duration = 5
     })
-    warn("Erro ao carregar: " .. tostring(errorMsg))
+    warn("Erro ao carregar o Main Script: " .. tostring(errorMsg))
 end
